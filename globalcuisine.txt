@@ -1,0 +1,103 @@
+CREATE DATABASE Global Cuisine finder; 
+
+ 
+
+mysql> CREATE DATABASE Global_Cuisine_finder; 
+
+Query OK, 1 row affected (0.32 sec) 
+
+  
+
+mysql> USE Global_Cuisine_finder; 
+
+Database changed 
+
+mysql> CREATE TABLE user( 
+
+    -> UserID INT AUTO_INCREMENT PRIMARY KEY, 
+
+    -> Name VARCHAR(100), 
+
+    -> Email VARCHAR(250) 
+
+    -> ); 
+
+Query OK, 0 rows affected (0.46 sec) 
+
+  
+
+mysql> CREATE TABLE Cuisines( 
+
+    -> Cuisine_ID INT PRIMARY KEY, 
+
+    -> Cusinie_name VARCHAR(250), 
+
+    -> Region VARCHAR(250) 
+
+    -> ); 
+
+Query OK, 0 rows affected (0.14 sec) 
+
+  
+
+mysql> CREATE TABLE Recipes( 
+
+    -> Recipe_ID VARCHAR(250) PRIMARY KEY, 
+
+    -> Dish_name VARCHAR(250), 
+
+    -> Prep_time INT, 
+
+    -> Image BLOB, 
+
+    -> Image_link VARCHAR(500) 
+
+    -> ); 
+
+Query OK, 0 rows affected (0.21 sec)  
+
+ 
+
+mysql> CREATE TABLE KeyIngredients( 
+
+    -> IngredientID VARCHAR(250) PRIMARY KEY, 
+
+    -> Ingredient_Name VARCHAR(250), 
+
+    -> RecipeID VARCHAR(250), 
+
+    -> Allergen_Status ENUM('Yes','No'), 
+
+    -> FOREIGN KEY (RecipeID) REFERENCES Recipes(Recipe_ID) 
+
+    -> ON DELETE CASCADE ON UPDATE CASCADE); 
+
+ 
+
+Query OK, 0 rows affected (0.23 sec) 
+
+ 
+
+mysql> CREATE TABLE Reviews( 
+
+    -> ReviewID INT PRIMARY KEY, 
+
+    -> Comment VARCHAR(300), 
+
+    -> Rating ENUM('1','2','3','4','5') 
+
+    -> , 
+
+    -> UserID Int, 
+
+    -> Recipe_ID VARCHAR(250), 
+
+    -> FOREIGN KEY (UserID) REFERENCES user(UserID) 
+
+    -> ON DELETE CASCADE ON UPDATE CASCADE, 
+
+    -> FOREIGN KEY (Recipe_ID) REFERENCES Recipes(Recipe_ID) 
+
+    -> ON DELETE CASCADE ON UPDATE CASCADE); 
+
+ 
